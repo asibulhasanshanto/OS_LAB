@@ -7,7 +7,7 @@ int main(){
 	int pipeFD[2],status;
 	pid_t childPID;
 
-	//create a pipe
+	//create a pipe, pipeFD[0]:read & pipeFD[1]:write 
 	status = pipe(pipeFD);
 	
 	if(status == -1){
@@ -23,13 +23,14 @@ int main(){
 	}
 	else if(childPID == 0){//child
 		printf("child process is writing to the pipe\n");
+		printf("pipeRead:%d",pipeFD[0]);
 		close(pipeFD[0]);
 		char *msg = "hello\n";
 		write(pipeFD[1],msg,strlen(msg)+1); 
 	}
 	else if(childPID > 0){//parent
 		wait(NULL);
-		printf("child process is reading the pipe\n");
+		printf("parent process is reading the pipe\n");
 		close(pipeFD[1]);
 		char buffer[200];
 		read(pipeFD[0],buffer,sizeof(buffer));
