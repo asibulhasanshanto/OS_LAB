@@ -1,4 +1,4 @@
-//get process id and it's parent process id and also kill them using kill command. ps command shows all the process
+ //get process id and it's parent process id and also kill them using kill command. ps command shows all the process
 #include<stdio.h>
 #include<unistd.h>
 int main()
