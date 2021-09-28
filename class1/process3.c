@@ -2,6 +2,7 @@
 #include<stdio.h>
 #include<unistd.h>
 #include<stdlib.h>
+#include<sys/wait.h>
 int main()
 {
     pid_t pid,cpid,cpid1;
@@ -19,9 +20,11 @@ int main()
     }
     else if (cpid>0)
     {
+	int *waitstatus;
         //for(i = 0;i<1;i--){
             pid = getpid();
         printf("i am parent process. %u, my child process: %u\n",pid,cpid);
+	wait(waitstatus);
         //}
     }
     

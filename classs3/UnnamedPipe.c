@@ -16,6 +16,7 @@ int main(){
 	}
 
 	//create a child
+	
 	childPID = fork();
 	if(childPID == -1){
 		printf("Error");
