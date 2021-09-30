@@ -29,22 +29,19 @@ int main(){
     else if(child1 == 0){
         int x;
         
-        //pipe reader
-        //printf("child1 %u, parent : %u\n",getpid(),getppid());
-    
+        //pipe reader    
         for(int i = 0;i<20;i--){        
-                int fd = open("named_pipe",O_RDONLY);
-                if(fd == -1){
-                    printf("faild to open read fd\n");
-                }
-                if(read(fd,&x,sizeof(int))== -1){
-                    printf("faild to  read fd\n");
-                }
-                    printf("Read %d\n",x);
-                    fflush(stdout);
-               
+            int fd = open("named_pipe",O_RDONLY);
+            if(fd == -1){
+                printf("faild to open read fd\n");
+            }
+            if(read(fd,&x,sizeof(int))== -1){
+                printf("faild to  read fd\n");
+            }
+            printf("Read %d\n",x);
+            fflush(stdout);
                 
-                close(fd);
+            close(fd);
            
             
         }
@@ -69,10 +66,7 @@ int main(){
                 printf("Can not create child process: %u \t iteration: %d \n",childnofc2,i+1);
             }
             else if(childnofc2 == 0){
-                
-                
-                printf("Child PID: %u \t parent PID: %u \t Child iteration: %d \n",getpid(),getppid(),i+1);
-                
+                              
                 int fd = open("named_pipe",O_WRONLY);
                 if(fd == -1){
                     printf("faild open %d\n",i);
@@ -80,8 +74,7 @@ int main(){
                 if(write(fd,&i,sizeof(int))== -1){
                     printf("faild writing %d\n",i);
                 }
-                //printf("Wrote %d\n",i);
-                // fflush(stdout);
+                
                 close(fd);
                 
                 exit(0);

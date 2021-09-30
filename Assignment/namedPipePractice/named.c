@@ -15,7 +15,11 @@ int main(){
         }        
     }
 
-    int arr[5]={1,9,5,7,4};
+    int pid = fork();
+    int pid2 = fork();
+
+    if(pid == 0){
+        int arr[5]={1,9,5,7,4};
     int fd = open("sum",O_WRONLY);
     if(fd == -1){
         return 1;
@@ -27,6 +31,21 @@ int main(){
         printf("Wrote %d\n",arr[i]);
     }
     close(fd);
+    }
+    else {
+        int arr[5]={0,0,0,0,0};
+    int fd = open("sum",O_WRONLY);
+    if(fd == -1){
+        return 1;
+    }
+    for(int i = 0;i<5;i++){
+        if(write(fd,&arr[i],sizeof(int))== -1){
+            return 2;
+        }
+        printf("Wrote %d\n",arr[i]);
+    }
+    close(fd);
+    }
 
     return 0;
 }

@@ -15,19 +15,22 @@ int main(){
         }        
     }
 
-    int arr[5];
-    int fd = open("sum",O_RDONLY);
+    for(int j = 0;j<5 ;j--){
+        int arr[5];
+        int fd = open("sum",O_RDONLY);
     if(fd == -1){
-        return 1;
+        printf("faild pointer \n");
     }
 
     for(int i = 0;i<5;i++){
         if(read(fd,&arr[i],sizeof(int))== -1){
-            return 2;
+            printf("faild read \n");
         }
         printf("Recived %d\n",arr[i]);
     }
+    printf("\n"); 
     close(fd);
 
+    }
     return 0;
 }
