@@ -2,11 +2,21 @@
 #include<unistd.h>
 #include<stdlib.h>
 #include<sys/wait.h>
+#include<sys/stat.h>
+#include<sys/types.h>
 #include<errno.h>
 #include<signal.h>
+#include<fcntl.h>
 
 int main(){
     pid_t child1,child2,childnofc2;
+
+    //creating the named pipe
+    if(mkfifo("named_pipe",0777) == -1){
+        if (errno!=EEXIST){
+            printf("Could not create named pipe\n");
+        }        
+    }
 
     //create first child of parent
     child1 = fork();
@@ -51,6 +61,7 @@ int main(){
         
         } 
 
+        //sending a signal to the lister process to to terminate.
         kill(child1,SIGTERM);
 
         return 0;
